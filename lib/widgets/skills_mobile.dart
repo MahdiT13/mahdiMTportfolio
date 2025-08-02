@@ -24,30 +24,31 @@ class SkillsMobileState extends State<SkillsMobile>
     super.initState();
     _scrollController = ScrollController();
 
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 20))
-          ..addListener(() {
-            if (_scrollController.hasClients) {
-              final maxScroll = _scrollController.position.maxScrollExtent;
-              final minScroll = _scrollController.position.minScrollExtent;
-              final currentOffset = _scrollController.offset;
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 20),
+    )..addListener(() {
+      if (_scrollController.hasClients) {
+        final maxScroll = _scrollController.position.maxScrollExtent;
+        final minScroll = _scrollController.position.minScrollExtent;
+        final currentOffset = _scrollController.offset;
 
-              double newOffset;
-              if (_scrollingForward) {
-                newOffset = currentOffset + 1;
-                if (newOffset >= maxScroll) {
-                  _scrollingForward = false;
-                }
-              } else {
-                newOffset = currentOffset - 1;
-                if (newOffset <= minScroll) {
-                  _scrollingForward = true;
-                }
-              }
+        double newOffset;
+        if (_scrollingForward) {
+          newOffset = currentOffset + 1;
+          if (newOffset >= maxScroll) {
+            _scrollingForward = false;
+          }
+        } else {
+          newOffset = currentOffset - 1;
+          if (newOffset <= minScroll) {
+            _scrollingForward = true;
+          }
+        }
 
-              _scrollController.jumpTo(newOffset.clamp(minScroll, maxScroll));
-            }
-          });
+        _scrollController.jumpTo(newOffset.clamp(minScroll, maxScroll));
+      }
+    });
 
     _animationController.repeat();
   }
@@ -61,8 +62,8 @@ class SkillsMobileState extends State<SkillsMobile>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    // final theme = Theme.of(context);
+    // final colorScheme = theme.colorScheme;
 
     return SizedBox(
       height: 140,
@@ -78,12 +79,7 @@ class SkillsMobileState extends State<SkillsMobile>
             decoration: BoxDecoration(
               gradient: CustomColor.clr,
               borderRadius: BorderRadius.circular(11),
-              border: Border.all(
-                color: colorScheme.onSurface.withOpacity(
-                  0.5,
-                ), // was Colors.white
-                width: 1,
-              ),
+              border: Border.all(color: Colors.white, width: 1),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

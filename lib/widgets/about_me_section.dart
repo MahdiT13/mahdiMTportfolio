@@ -22,33 +22,11 @@ class AboutMeSection extends StatelessWidget {
         children: [
           // Profile Image
           Container(
-            height: 400,
-            width: 250,
+            height: 200,
+            width: 200,
             decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: theme.colorScheme.onBackground,
-                  width: 5,
-                ),
-                left: BorderSide(
-                  color: theme.colorScheme.onBackground,
-                  width: 10,
-                ),
-                right: BorderSide(
-                  color: theme.colorScheme.onBackground,
-                  width: 10,
-                ),
-                top: BorderSide(
-                  color: theme.colorScheme.onBackground,
-                  width: 10,
-                ),
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(100),
-                topRight: Radius.circular(100),
-                bottomLeft: Radius.circular(3),
-                bottomRight: Radius.circular(3),
-              ),
+              border: Border.all(color: Colors.white, width: 5),
+              borderRadius: BorderRadius.circular(200),
               image: const DecorationImage(
                 colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
                 fit: BoxFit.cover,

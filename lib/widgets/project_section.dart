@@ -23,13 +23,6 @@ class ProjectsSection extends StatelessWidget {
               fontSize: 40,
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.onBackground,
-              shadows: [
-                BoxShadow(
-                  color: theme.colorScheme.secondary.withOpacity(0.8),
-                  blurRadius: 30,
-                  offset: const Offset(1, 10),
-                ),
-              ],
             ),
           ),
           const SizedBox(height: 50),

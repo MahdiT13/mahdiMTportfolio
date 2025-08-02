@@ -32,12 +32,13 @@ class MainMobile extends StatelessWidget {
         Container(
           height: 700,
           width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage('assets/images/bg1.jpg'),
             ),
-            borderRadius: BorderRadius.all(Radius.circular(200)),
+            borderRadius: BorderRadius.all(Radius.circular(250)),
+            border: Border.all(color: Colors.white, width: 5),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

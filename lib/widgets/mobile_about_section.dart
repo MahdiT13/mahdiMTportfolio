@@ -27,27 +27,22 @@ class MobileAboutSection extends StatelessWidget {
                 shaderCallback: (bounds) {
                   return const LinearGradient(
                     colors: [
-                      Color.fromARGB(102, 0, 0, 0),
-                      Color.fromARGB(147, 0, 0, 0),
+                      Color.fromARGB(72, 0, 0, 0),
+                      Color.fromARGB(90, 0, 0, 0),
                     ],
                   ).createShader(bounds);
                 },
                 blendMode: BlendMode.srcATop,
                 child: Container(
-                  height: 180,
-                  width: 100,
+                  height: 90,
+                  width: 90,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.white, width: 5),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(100),
-                      topRight: Radius.circular(100),
-                      bottomLeft: Radius.circular(3),
-                      bottomRight: Radius.circular(3),
-                    ),
+                    borderRadius: BorderRadius.circular(200),
                     image: const DecorationImage(
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
-                        Color.fromARGB(76, 0, 0, 0),
+                        Color.fromARGB(32, 0, 0, 0),
                         BlendMode.darken,
                       ),
                       image: AssetImage('assets/images/mypic.jpeg'),
@@ -109,16 +104,16 @@ class MobileAboutSection extends StatelessWidget {
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: () =>
-                                        openInNewTab(links[i].instaLink),
+                                    onTap:
+                                        () => openInNewTab(links[i].instaLink),
                                     child: Image.asset(
                                       'assets/logos/insta.png',
                                       width: 30,
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: () =>
-                                        openInNewTab(links[i].githubLink),
+                                    onTap:
+                                        () => openInNewTab(links[i].githubLink),
                                     child: Image.asset(
                                       'assets/logos/git.png',
                                       width: 30,

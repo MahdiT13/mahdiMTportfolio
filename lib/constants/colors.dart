@@ -6,8 +6,8 @@ class CustomColor {
   static const Color surface = Color(0xff2C3E50);
   static const Color borderDivider = Color(0xff3E5C76);
   static const Color text = Color(0xffADB5BD);
-  static const Color btns =  Color(0xFF0D47A1);
+  static const Color btns = Color(0xFF0D47A1);
   static const Gradient clr = LinearGradient(
-    colors: [Color.fromARGB(255, 66, 104, 160), CustomColor.btns],
+    colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 2, 29, 72)],
   );
 }

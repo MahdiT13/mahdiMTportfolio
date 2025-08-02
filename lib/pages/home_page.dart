@@ -42,6 +42,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -68,14 +74,34 @@ class _HomePageState extends State<HomePage> {
             height: screenHeight,
             child: Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Image.asset(
-                    'assets/images/island.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                constraints.maxWidth >= 700
+                    ? Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Image.asset(
+                        'assets/images/island.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                    : Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 5, 43, 100),
+                            Color.fromARGB(255, 11, 66, 148),
+                            Color.fromARGB(255, 9, 32, 67),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                        child: Container(color: Colors.black.withOpacity(0.05)),
+                      ),
+                    ),
                 SingleChildScrollView(
                   controller: scrollController,
                   child: Column(
@@ -83,10 +109,11 @@ class _HomePageState extends State<HomePage> {
                       constraints.maxWidth >= kMinDesktopWidth
                           ? Header(onNavMenuTab: scrollToSection)
                           : MobileHeader(
-                              onLogoTap: () {},
-                              onMenuTap: () =>
-                                  scaffoldKey.currentState?.openEndDrawer(),
-                            ),
+                            onLogoTap: () {},
+                            onMenuTap:
+                                () => scaffoldKey.currentState?.openEndDrawer(),
+                          ),
+                      // Main section
                       Container(
                         key: navbarKeys[0],
                         padding: const EdgeInsets.symmetric(
@@ -94,12 +121,14 @@ class _HomePageState extends State<HomePage> {
                           vertical: 40,
                         ),
                         child: _GlassSection(
-                          child: constraints.maxWidth >= kMinDesktopWidth
-                              ? MainDesktop()
-                              : MainMobile(),
+                          child:
+                              constraints.maxWidth >= kMinDesktopWidth
+                                  ? MainDesktop()
+                                  : MainMobile(),
                         ),
                       ),
                       const Divider(color: Colors.white24, thickness: 0.3),
+                      // Skills section
                       Container(
                         key: navbarKeys[1],
                         padding: const EdgeInsets.symmetric(
@@ -119,8 +148,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const Divider(color: Colors.white24, thickness: 0.3),
+                      // Project section
                       ProjectsSection(key: navbarKeys[2]),
                       const Divider(color: Colors.white24, thickness: 0.3),
+                      // Certificate section
                       Container(
                         key: navbarKeys[3],
                         padding: const EdgeInsets.all(20),
@@ -135,19 +166,23 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const Divider(color: Colors.white24, thickness: 0.3),
+
+                      // About section
                       Container(
                         key: navbarKeys[4],
                         width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 50,
-                            horizontal: 20,
-                          ),
-                          child: constraints.maxWidth >= kMinDesktopWidth
-                              ? const AboutMeSection()
-                              : const MobileAboutSection(),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 50,
+                          horizontal: 20,
+                        ),
+                        child: _GlassSection(
+                          child:
+                              constraints.maxWidth >= kMinDesktopWidth
+                                  ? const AboutMeSection()
+                                  : const MobileAboutSection(),
                         ),
                       ),
+                      //footer
                       const Footer(),
                     ],
                   ),
@@ -155,14 +190,15 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          endDrawer: constraints.maxWidth >= kMinDesktopWidth
-              ? null
-              : MobileDrawer(
-                  onNavItemTab: (index) {
-                    scaffoldKey.currentState?.closeEndDrawer();
-                    scrollToSection(index);
-                  },
-                ),
+          endDrawer:
+              constraints.maxWidth >= kMinDesktopWidth
+                  ? null
+                  : MobileDrawer(
+                    onNavItemTab: (index) {
+                      scaffoldKey.currentState?.closeEndDrawer();
+                      scrollToSection(index);
+                    },
+                  ),
           floatingActionButton: FloatingActionButton(
             onPressed: scrollToTop,
             backgroundColor: const Color(0xFF0D47A1),
@@ -184,13 +220,6 @@ class _HomePageState extends State<HomePage> {
         fontSize: 40,
         fontWeight: FontWeight.bold,
         color: Theme.of(context).textTheme.headlineLarge?.color,
-        shadows: const [
-          BoxShadow(
-            color: Colors.cyanAccent,
-            blurRadius: 20,
-            offset: Offset(0, 6),
-          ),
-        ],
       ),
     );
   }
@@ -206,14 +235,14 @@ class _GlassSection extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.white24),
+            border: Border.all(color: const Color.fromARGB(85, 255, 255, 255)),
           ),
           child: child,
         ),
