@@ -35,7 +35,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-    // ✅ Precache the background image to ensure it loads
     precacheImage(const AssetImage('assets/images/island.jpg'), context);
     super.didChangeDependencies();
   }
@@ -67,111 +66,123 @@ class _HomePageState extends State<HomePage> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        // Get viewport height, fallback to MediaQuery if constraints.maxHeight=0
+        final viewportHeight = constraints.maxHeight > 0
+            ? constraints.maxHeight
+            : MediaQuery.of(context).size.height;
+
         return Scaffold(
           key: scaffoldKey,
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  'assets/images/island.jpg',
-                  fit: BoxFit.cover,
+          body: SizedBox(
+            height: viewportHeight,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                // Background with explicit height
+                Container(
+                  width: double.infinity,
+                  height: viewportHeight,
+                  child: Image.asset(
+                    'assets/images/island.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
 
-              // Main content
-              SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  children: [
-                    // HEADER
-                    constraints.maxWidth >= kMinDesktopWidth
-                        ? Header(onNavMenuTab: scrollToSection)
-                        : MobileHeader(
-                            onLogoTap: () {},
-                            onMenuTap: () =>
-                                scaffoldKey.currentState?.openEndDrawer(),
-                          ),
+                // Main content scrolls over background
+                SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    children: [
+                      // HEADER
+                      constraints.maxWidth >= kMinDesktopWidth
+                          ? Header(onNavMenuTab: scrollToSection)
+                          : MobileHeader(
+                              onLogoTap: () {},
+                              onMenuTap: () =>
+                                  scaffoldKey.currentState?.openEndDrawer(),
+                            ),
 
-                    // MAIN
-                    Container(
-                      key: navbarKeys[0],
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 40,
-                      ),
-                      child: _GlassSection(
-                        child: constraints.maxWidth >= kMinDesktopWidth
-                            ? MainDesktop()
-                            : MainMobile(),
-                      ),
-                    ),
-
-                    const Divider(color: Colors.white24, thickness: 0.3),
-
-                    // SKILLS
-                    Container(
-                      key: navbarKeys[1],
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 40,
-                      ),
-                      child: _GlassSection(
-                        child: Column(
-                          children: [
-                            _sectionTitle('Skills'),
-                            const SizedBox(height: 30),
-                            constraints.maxWidth >= kMinDesktopWidth
-                                ? SkillsDesktop(skills: skills)
-                                : SkillsMobile(skills: skills),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const Divider(color: Colors.white24, thickness: 0.3),
-
-                    // PROJECTS
-                    ProjectsSection(key: navbarKeys[2]),
-
-                    const Divider(color: Colors.white24, thickness: 0.3),
-
-                    // CERTIFICATES
-                    Container(
-                      key: navbarKeys[3],
-                      padding: const EdgeInsets.all(20),
-                      child: _GlassSection(
-                        child: Column(
-                          children: [
-                            _sectionTitle('Certificates'),
-                            const SizedBox(height: 30),
-                            CertificatesSection(),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const Divider(color: Colors.white24, thickness: 0.3),
-
-                    // ABOUT ME
-                    Container(
-                      key: navbarKeys[4],
-                      width: double.infinity,
-                      child: Padding(
+                      // MAIN
+                      Container(
+                        key: navbarKeys[0],
                         padding: const EdgeInsets.symmetric(
-                          vertical: 50,
-                          horizontal: 20,
+                          horizontal: 16,
+                          vertical: 40,
                         ),
-                        child: constraints.maxWidth >= kMinDesktopWidth
-                            ? const AboutMeSection()
-                            : const MobileAboutSection(),
+                        child: _GlassSection(
+                          child: constraints.maxWidth >= kMinDesktopWidth
+                              ? MainDesktop()
+                              : MainMobile(),
+                        ),
                       ),
-                    ),
 
-                    const Footer(),
-                  ],
+                      const Divider(color: Colors.white24, thickness: 0.3),
+
+                      // SKILLS
+                      Container(
+                        key: navbarKeys[1],
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 40,
+                        ),
+                        child: _GlassSection(
+                          child: Column(
+                            children: [
+                              _sectionTitle('Skills'),
+                              const SizedBox(height: 30),
+                              constraints.maxWidth >= kMinDesktopWidth
+                                  ? SkillsDesktop(skills: skills)
+                                  : SkillsMobile(skills: skills),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      const Divider(color: Colors.white24, thickness: 0.3),
+
+                      // PROJECTS
+                      ProjectsSection(key: navbarKeys[2]),
+
+                      const Divider(color: Colors.white24, thickness: 0.3),
+
+                      // CERTIFICATES
+                      Container(
+                        key: navbarKeys[3],
+                        padding: const EdgeInsets.all(20),
+                        child: _GlassSection(
+                          child: Column(
+                            children: [
+                              _sectionTitle('Certificates'),
+                              const SizedBox(height: 30),
+                              CertificatesSection(),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      const Divider(color: Colors.white24, thickness: 0.3),
+
+                      // ABOUT ME
+                      Container(
+                        key: navbarKeys[4],
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 50,
+                            horizontal: 20,
+                          ),
+                          child: constraints.maxWidth >= kMinDesktopWidth
+                              ? const AboutMeSection()
+                              : const MobileAboutSection(),
+                        ),
+                      ),
+
+                      const Footer(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           endDrawer: constraints.maxWidth >= kMinDesktopWidth
               ? null
