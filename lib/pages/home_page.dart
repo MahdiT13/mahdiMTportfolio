@@ -33,12 +33,6 @@ class _HomePageState extends State<HomePage> {
   final scrollController = ScrollController();
   final List<GlobalKey> navbarKeys = List.generate(5, (index) => GlobalKey());
 
-  @override
-  void didChangeDependencies() {
-    precacheImage(const AssetImage('assets/images/island.jpg'), context);
-    super.didChangeDependencies();
-  }
-
   void scrollToTop() {
     scrollController.animateTo(
       0.0,
@@ -49,6 +43,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     void scrollToSection(int navIndex) {
       if (navIndex == 5) {
         Future.microtask(() {
@@ -66,34 +62,24 @@ class _HomePageState extends State<HomePage> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Get viewport height, fallback to MediaQuery if constraints.maxHeight=0
-        final viewportHeight = constraints.maxHeight > 0
-            ? constraints.maxHeight
-            : MediaQuery.of(context).size.height;
-
         return Scaffold(
           key: scaffoldKey,
           body: SizedBox(
-            height: viewportHeight,
-            width: double.infinity,
+            height: screenHeight,
             child: Stack(
               children: [
-                // Background with explicit height
                 Container(
                   width: double.infinity,
-                  height: viewportHeight,
+                  height: double.infinity,
                   child: Image.asset(
                     'assets/images/island.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
-
-                // Main content scrolls over background
                 SingleChildScrollView(
                   controller: scrollController,
                   child: Column(
                     children: [
-                      // HEADER
                       constraints.maxWidth >= kMinDesktopWidth
                           ? Header(onNavMenuTab: scrollToSection)
                           : MobileHeader(
@@ -101,8 +87,6 @@ class _HomePageState extends State<HomePage> {
                               onMenuTap: () =>
                                   scaffoldKey.currentState?.openEndDrawer(),
                             ),
-
-                      // MAIN
                       Container(
                         key: navbarKeys[0],
                         padding: const EdgeInsets.symmetric(
@@ -115,10 +99,7 @@ class _HomePageState extends State<HomePage> {
                               : MainMobile(),
                         ),
                       ),
-
                       const Divider(color: Colors.white24, thickness: 0.3),
-
-                      // SKILLS
                       Container(
                         key: navbarKeys[1],
                         padding: const EdgeInsets.symmetric(
@@ -137,15 +118,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-
                       const Divider(color: Colors.white24, thickness: 0.3),
-
-                      // PROJECTS
                       ProjectsSection(key: navbarKeys[2]),
-
                       const Divider(color: Colors.white24, thickness: 0.3),
-
-                      // CERTIFICATES
                       Container(
                         key: navbarKeys[3],
                         padding: const EdgeInsets.all(20),
@@ -159,10 +134,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-
                       const Divider(color: Colors.white24, thickness: 0.3),
-
-                      // ABOUT ME
                       Container(
                         key: navbarKeys[4],
                         width: double.infinity,
@@ -176,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                               : const MobileAboutSection(),
                         ),
                       ),
-
                       const Footer(),
                     ],
                   ),
