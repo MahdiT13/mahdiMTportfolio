@@ -40,7 +40,7 @@ class Header extends StatelessWidget {
                 const Spacer(),
                 for (int i = 0; i < navTitle.length; i++)
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 18),
                     child: Container(
                       decoration: BoxDecoration(
                         color: CustomColor.btns.withOpacity(0.7),

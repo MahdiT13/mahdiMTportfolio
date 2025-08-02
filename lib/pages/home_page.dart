@@ -64,15 +64,19 @@ class _HomePageState extends State<HomePage> {
           key: scaffoldKey,
           body: Stack(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/island.jpg'),
-                    fit: BoxFit.cover,
+              // ✅ Background image fix for all screen sizes
+              Positioned.fill(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/island.jpg'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-              //  Main content
+
+              // ✅ Main content
               SingleChildScrollView(
                 controller: scrollController,
                 child: Column(
@@ -146,11 +150,10 @@ class _HomePageState extends State<HomePage> {
 
                     const Divider(color: Colors.white24, thickness: 0.3),
 
-                    // ABOUT ME with image retained
+                    // ABOUT ME
                     Container(
                       key: navbarKeys[4],
                       width: double.infinity,
-                      decoration: BoxDecoration(),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 50,
@@ -181,7 +184,6 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: const Color(0xFF0D47A1),
             shape: const CircleBorder(),
             hoverColor: const Color.fromARGB(255, 76, 123, 193),
-            // mini: true,
             splashColor: const Color.fromARGB(255, 203, 14, 0),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             child: const Icon(Icons.arrow_upward_rounded),
