@@ -33,8 +33,12 @@ class MainMobile extends StatelessWidget {
           height: 700,
           width: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(
+            image: const DecorationImage(
               fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Color.fromARGB(32, 0, 0, 0),
+                BlendMode.darken,
+              ),
               image: AssetImage('assets/images/bg1.jpg'),
             ),
             borderRadius: BorderRadius.all(Radius.circular(250)),
