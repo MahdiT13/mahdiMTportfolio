@@ -64,7 +64,6 @@ class _HomePageState extends State<HomePage> {
           key: scaffoldKey,
           body: Stack(
             children: [
-              // ✅ Background image fix for all screen sizes
               Positioned.fill(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // ✅ Main content
+              //  Main content
               SingleChildScrollView(
                 controller: scrollController,
                 child: Column(
