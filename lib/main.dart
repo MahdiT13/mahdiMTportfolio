@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState != ConnectionState.done) {
             // Lottie-based loading screen
             return Scaffold(
+              backgroundColor: Colors.black,
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -81,11 +82,6 @@ class MyApp extends StatelessWidget {
                       width: 150,
                       height: 150,
                       fit: BoxFit.contain,
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Loading...',
-                      style: TextStyle(color: Colors.white70, fontSize: 16),
                     ),
                   ],
                 ),
