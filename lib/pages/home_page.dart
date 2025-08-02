@@ -33,6 +33,13 @@ class _HomePageState extends State<HomePage> {
   final scrollController = ScrollController();
   final List<GlobalKey> navbarKeys = List.generate(5, (index) => GlobalKey());
 
+  @override
+  void didChangeDependencies() {
+    // ✅ Precache the background image to ensure it loads
+    precacheImage(const AssetImage('assets/images/island.jpg'), context);
+    super.didChangeDependencies();
+  }
+
   void scrollToTop() {
     scrollController.animateTo(
       0.0,
@@ -65,17 +72,13 @@ class _HomePageState extends State<HomePage> {
           body: Stack(
             children: [
               Positioned.fill(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/island.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: Image.asset(
+                  'assets/images/island.jpg',
+                  fit: BoxFit.cover,
                 ),
               ),
 
-              //  Main content
+              // Main content
               SingleChildScrollView(
                 controller: scrollController,
                 child: Column(
