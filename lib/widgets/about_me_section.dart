@@ -95,6 +95,14 @@ class AboutMeSection extends StatelessWidget {
                               ),
                             ),
                             InkWell(
+                                    onTap:
+                                        () => openInNewTab(links[i].linkedInLink),
+                                    child: Image.asset(
+                                      'assets/logos/linkedIn.png',
+                                      width: 30,
+                                    ),
+                                  ),
+                            InkWell(
                               onTap: () => openInNewTab(links[i].githubLink),
                               child: Image.asset(
                                 'assets/logos/git.png',
