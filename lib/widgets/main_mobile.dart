@@ -30,7 +30,7 @@ class MainMobile extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 700,
+          height: 600,
           width: double.infinity,
           decoration: BoxDecoration(
             image: const DecorationImage(
