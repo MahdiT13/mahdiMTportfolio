@@ -35,10 +35,6 @@ class MainMobile extends StatelessWidget {
           decoration: BoxDecoration(
             image: const DecorationImage(
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Color.fromARGB(32, 0, 0, 0),
-                BlendMode.darken,
-              ),
               image: AssetImage('assets/images/bg333.jpg'),
             ),
             borderRadius: BorderRadius.all(Radius.circular(250)),
@@ -54,7 +50,7 @@ class MainMobile extends StatelessWidget {
                   width: screenWidth / 1.2,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: theme.cardColor.withOpacity(0.5),
+                    color: theme.cardColor.withOpacity(0.7),
                     border: Border.all(color: theme.dividerColor, width: 1),
                   ),
                   child: Center(
