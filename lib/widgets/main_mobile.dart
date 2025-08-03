@@ -39,7 +39,7 @@ class MainMobile extends StatelessWidget {
                 Color.fromARGB(32, 0, 0, 0),
                 BlendMode.darken,
               ),
-              image: AssetImage('assets/images/bg1.jpg'),
+              image: AssetImage('assets/images/bg333.jpg'),
             ),
             borderRadius: BorderRadius.all(Radius.circular(250)),
             border: Border.all(color: Colors.white, width: 5),
