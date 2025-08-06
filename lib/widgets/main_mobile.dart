@@ -16,7 +16,7 @@ class MainMobile extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     final String resumeUrl =
-        'https://www.dropbox.com/scl/fi/r2mgzpqu8zw0kxc8zk5ho/Mahdi_Tawbe_CV.pdf?rlkey=mgohmugrp0eg9ksbn21iak4dg&st=7ifk0mpd&raw=1';
+        'https://www.dropbox.com/scl/fi/92xikjsfjre1w82yhiam2/Mahdi_Tawbe_Resume.pdf?rlkey=xyjkv08xdrje3vdiifrpxqc16&st=3nulhhuu&dl=0';
 
     Future<void> viewResume() async {
       final Uri url = Uri.parse(resumeUrl);
